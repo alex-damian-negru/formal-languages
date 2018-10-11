@@ -9,18 +9,13 @@ namespace FormalLanguages
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var grammar = new GrammarBuilder();
-            grammar.BuildGrammar("");
+            var fileGrammar = GetFileGrammar();
+            BuildGrammar(fileGrammar);
 
             ShowRules();
 
-            Console.WriteLine("Exemplu citit din fișier: " + GetFileGrammar());
+            Console.WriteLine("Exemplu citit din fișier: " + fileGrammar);
             Console.ReadKey();
-        }
-
-        private string BuildGrammar(string input)
-        {
-            return "";
         }
 
         private static void ShowRules()
@@ -37,6 +32,10 @@ namespace FormalLanguages
         private static string GetFileGrammar()
         {
             return System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
+        }
+
+        private static void BuildGrammar(string input)
+        {
         }
     }
 }
