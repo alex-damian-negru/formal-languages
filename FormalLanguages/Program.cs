@@ -7,21 +7,24 @@ namespace FormalLanguages
     {
         private static void Main(string[] args)
         {
-            GrammarBuilder test = new GrammarBuilder();
-            test.GetGrammar("");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            var grammar = new GrammarBuilder();
+            grammar.BuildGrammar("");
 
             ShowRules();
+
+            Console.WriteLine("Exemplu citit din fișier: " + GetFileGrammar());
             Console.ReadKey();
         }
 
-        private string GetGrammar(string input)
+        private string BuildGrammar(string input)
         {
             return "";
         }
 
         private static void ShowRules()
         {
-            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("1. Primul simbol (S) din prima producție reprezintă axioma (simbolul de start)");
             Console.WriteLine("2. Simbolul de separare dintre producții este $");
             Console.WriteLine("3. Simbolurile neterminale sunt scrise cu litere mari");
@@ -29,6 +32,11 @@ namespace FormalLanguages
             Console.WriteLine("5. Secvența vidă va fi @");
             Console.WriteLine("6. Simbolul care marchează sfârșitul gramaticii este &");
             Console.WriteLine("-----------------------------------------------------");
+        }
+
+        private static string GetFileGrammar()
+        {
+            return System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
         }
     }
 }
