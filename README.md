@@ -1,6 +1,6 @@
 # Temă
-Să se citească o gramatică independentă de context sub formă de șir de caractere. Citirea se face de la tastatură și din fișier. Se va construi un meniu corespunzător. Regulile de citire se afișsează înaintea citirii și sunt următoarele:
-1. Primul simbol din prima producțue reprezintă axioma (simbolul de start)
+Să se citească o gramatică independentă de context sub formă de șir de caractere. Citirea se face de la tastatură și din fișier. Se va construi un meniu corespunzător. Regulile de citire se afișează înaintea citirii și sunt următoarele:
+1. Primul simbol din prima producție reprezintă axioma (simbolul de start)
 2. Simbolul de separare dintre producții este `$`
 3. Simbolurile neterminale sunt scrise cu litere mari
 4. Simbolurile terminale sunt scrise cu litere mici
