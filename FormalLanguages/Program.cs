@@ -10,34 +10,39 @@ namespace FormalLanguages
         {
             Console.OutputEncoding = Encoding.UTF8;
             ShowRules();
-
-            var fileGrammar = GetInput();
-            BuildGrammar(fileGrammar);
-
-            Console.ReadKey();
+            
+            while (true)
+            {
+                var input = GetInput();
+                if (input == "exit") return;
+                BuildGrammar(input);
+                Console.WriteLine("Doriți o altă opțiune? (1, 2, exit)");
+            }
         }
 
         private static void ShowRules()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("1. Primul simbol (S) din prima producție reprezintă axioma (simbolul de start)");
             Console.WriteLine("2. Simbolul de separare dintre producții este $");
             Console.WriteLine("3. Simbolurile neterminale sunt scrise cu litere mari");
             Console.WriteLine("4. Simbolurile terminale sunt scrise cu litere mici");
             Console.WriteLine("5. Secvența vidă va fi @");
             Console.WriteLine("6. Simbolul care marchează sfârșitul gramaticii este &");
-            Console.WriteLine("-----------------------------------------------------");
-        }
-
-        private static string GetInput()
-        {
+            AddLine();
             Console.WriteLine("Selectați tipul de input dorit: ");
             Console.WriteLine("1. Citire de la tastatură");
             Console.WriteLine("2. Citire din fișier");
+            AddLine();
+        }
+
+        private static string GetInput()
+        { 
             var input = Console.ReadLine();
 
-            while (input != "1" && input != "2")
+            while (input != "1" && input != "2" && input != "exit")
             {
-                Console.WriteLine("Opțiunile permise sunt 1 sau 2.");
+                Console.WriteLine("Opțiunile permise sunt 1, 2 sau 'exit'.");
                 input = Console.ReadLine();
             }
 
@@ -46,15 +51,15 @@ namespace FormalLanguages
                 case "1":
                     Console.Write("Input: ");
                     var choice = Console.ReadLine();
-                    Console.WriteLine("-----------------------------------------------------");
                     return choice;
                 case "2":
                     var fileInput = System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
-                    Console.WriteLine("-----------------------------------------------------");
                     return fileInput;
+                case "exit":
+                    return "exit";
                 default:
-                    return "";
+                    return "exit";
             }
         }
 
@@ -88,10 +93,10 @@ namespace FormalLanguages
                         continue;
                     case '@':
                         terminal.Add("lambda");
-                        Console.Write("lambda");
+                        Console.Write("lambda ");
                         continue;
                     case '&':
-                        Console.WriteLine("\n-----------------------------------------------------");
+                        Console.WriteLine();
                         break;
                     default:
                         Console.Write(charArray[i]);
@@ -100,6 +105,7 @@ namespace FormalLanguages
             }
             PrintList(nonTerminal, "V_N");
             PrintList(terminal, "V_T");
+            AddLine();
         }
 
         private static void PrintList(IEnumerable<string> list, string type)
@@ -108,6 +114,13 @@ namespace FormalLanguages
             foreach (var entry in list)
                 Console.Write($"{entry}, ");
             Console.WriteLine("\b\b}");
+        }
+
+        private static void AddLine()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("-----------------------------------------------------");
+            Console.ResetColor();
         }
     }
 }
