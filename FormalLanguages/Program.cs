@@ -9,11 +9,9 @@ namespace FormalLanguages
         private static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
-
-            var fileGrammar = GetFileGrammar();
-          
             ShowRules();
-            Console.WriteLine("Exemplu citit din fișier: " + fileGrammar);
+
+            var fileGrammar = GetInput();
             BuildGrammar(fileGrammar);
 
             Console.ReadKey();
@@ -30,9 +28,34 @@ namespace FormalLanguages
             Console.WriteLine("-----------------------------------------------------");
         }
 
-        private static string GetFileGrammar()
+        private static string GetInput()
         {
-            return System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
+            Console.WriteLine("Selectați tipul de input dorit: ");
+            Console.WriteLine("1. Citire de la tastatură");
+            Console.WriteLine("2. Citire din fișier");
+            var input = Console.ReadLine();
+
+            while (input != "1" && input != "2")
+            {
+                Console.WriteLine("Opțiunile permise sunt 1 sau 2.");
+                input = Console.ReadLine();
+            }
+
+            switch (input)
+            {
+                case "1":
+                    Console.Write("Input: ");
+                    var choice = Console.ReadLine();
+                    Console.WriteLine("-----------------------------------------------------");
+                    return choice;
+                case "2":
+                    var fileInput = System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
+                    Console.WriteLine("Input din fișier: " + fileInput);
+                    Console.WriteLine("-----------------------------------------------------");
+                    return fileInput;
+                default:
+                    return "";
+            }
         }
 
         private static void BuildGrammar(string input)
@@ -74,9 +97,9 @@ namespace FormalLanguages
                         Console.Write(charArray[i]);
                         break;
                 }
-                PrintList(nonTerminal, "V_N");
-                PrintList(terminal, "V_T");
             }
+            PrintList(nonTerminal, "V_N");
+            PrintList(terminal, "V_T");
         }
 
         private static void PrintList(IEnumerable<string> list, string type)
