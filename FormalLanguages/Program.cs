@@ -38,26 +38,37 @@ namespace FormalLanguages
 
         private static string GetInput()
         { 
-            var input = Console.ReadLine();
+            var choice = Console.ReadLine();
 
-            while (input != "1" && input != "2" && input != "exit")
+            while (choice != "1" && choice != "2" && choice != "exit")
             {
                 Console.WriteLine("Opțiunile permise sunt 1, 2 sau 'exit'.");
-                input = Console.ReadLine();
+                choice = Console.ReadLine();
             }
 
-            switch (input)
+            switch (choice)
             {
                 case "1":
                     Console.Write("Input: ");
-                    var choice = Console.ReadLine();
-                    return choice;
+                    var input = Console.ReadLine();
+                    while (!input.EndsWith("&"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Simbolul care marchează sfârșitul gramaticii trebuie să fie '&'");
+                        Console.ResetColor();
+                        Console.Write("Reintroduceți: ");
+                        input = Console.ReadLine();
+                    }
+                    return input;
+
                 case "2":
                     var fileInput = System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
+
                 case "exit":
                     return "exit";
+
                 default:
                     return "exit";
             }
