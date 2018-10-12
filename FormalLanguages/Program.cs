@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace FormalLanguages
 {
     internal class GrammarBuilder 
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
 
@@ -36,8 +37,8 @@ namespace FormalLanguages
 
         private static void BuildGrammar(string input)
         {
-            var terminal = "";
-            var nonTerminal = "";
+            var terminal = new HashSet<string>();
+            var nonTerminal = new HashSet<string>();
             var charArray = input.ToCharArray();
 
             Console.Write($"{charArray[0]} --> ");
@@ -45,14 +46,14 @@ namespace FormalLanguages
             {
                 if (char.IsUpper(charArray[i]))
                 {
-                    nonTerminal += charArray[i] + ", ";
+                    nonTerminal.Add(charArray[i].ToString());
                     Console.Write(charArray[i]);
                     continue;
                 }
 
                 if (char.IsLower(charArray[i]))
                 {
-                    terminal += charArray[i] + ", ";
+                    terminal.Add(charArray[i].ToString());
                     Console.Write(charArray[i]);
                     continue;
                 }
@@ -63,7 +64,7 @@ namespace FormalLanguages
                         Console.Write($"\n{charArray[++i]} --> ");
                         continue;
                     case '@':
-                        terminal += "lambda, ";
+                        terminal.Add("lambda");
                         Console.Write("lambda");
                         continue;
                     case '&':
@@ -73,7 +74,17 @@ namespace FormalLanguages
                         Console.Write(charArray[i]);
                         break;
                 }
+                PrintList(nonTerminal, "V_N");
+                PrintList(terminal, "V_T");
             }
+        }
+
+        private static void PrintList(IEnumerable<string> list, string type)
+        {
+            Console.Write($"{type} = {{");
+            foreach (var entry in list)
+                Console.Write($"{entry}, ");
+            Console.WriteLine("\b\b}");
         }
     }
 }
