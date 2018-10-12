@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace FormalLanguages
 {
-    internal class GrammarBuilder 
+    internal class GrammarBuilder
     {
         private static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
             ShowRules();
-            
+
             while (true)
             {
                 var input = GetInput();
@@ -38,7 +39,7 @@ namespace FormalLanguages
         }
 
         private static string GetInput()
-        { 
+        {
             var choice = Console.ReadLine();
 
             while (choice != "1" && choice != "2" && choice != "3")
@@ -70,10 +71,11 @@ namespace FormalLanguages
                         Console.Write("Reintroduceți: ");
                         input = Console.ReadLine();
                     }
+
                     return input;
 
                 case "2":
-                    var fileInput = System.IO.File.ReadAllText(@"..\..\ProductionExample.txt");
+                    var fileInput = File.ReadAllText(@"..\..\ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
 
@@ -125,6 +127,7 @@ namespace FormalLanguages
                         break;
                 }
             }
+
             PrintList(nonTerminal, "V_N");
             PrintList(terminal, "V_T");
             AddLine();
