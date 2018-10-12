@@ -14,9 +14,9 @@ namespace FormalLanguages
             while (true)
             {
                 var input = GetInput();
-                if (input == "exit") return;
+                if (input == "3") return;
                 BuildGrammar(input);
-                Console.WriteLine("Doriți o altă opțiune? (1, 2, exit)");
+                Console.WriteLine("Doriți o altă opțiune? (1, 2, 3)");
             }
         }
 
@@ -33,6 +33,7 @@ namespace FormalLanguages
             Console.WriteLine("Selectați tipul de input dorit: ");
             Console.WriteLine("1. Citire de la tastatură");
             Console.WriteLine("2. Citire din fișier");
+            Console.WriteLine("3. Ieșire");
             AddLine();
         }
 
@@ -40,9 +41,9 @@ namespace FormalLanguages
         { 
             var choice = Console.ReadLine();
 
-            while (choice != "1" && choice != "2" && choice != "exit")
+            while (choice != "1" && choice != "2" && choice != "3")
             {
-                Console.WriteLine("Opțiunile permise sunt 1, 2 sau 'exit'.");
+                Console.WriteLine("Opțiunile permise sunt 1, 2, sau 3.");
                 choice = Console.ReadLine();
             }
 
@@ -51,6 +52,16 @@ namespace FormalLanguages
                 case "1":
                     Console.Write("Input: ");
                     var input = Console.ReadLine();
+
+                    while (!input.StartsWith("S"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Primul simbol trebuie să fie întotdeauna 'S'");
+                        Console.ResetColor();
+                        Console.Write("Reintroduceți: ");
+                        input = Console.ReadLine();
+                    }
+
                     while (!input.EndsWith("&"))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -66,11 +77,11 @@ namespace FormalLanguages
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
 
-                case "exit":
-                    return "exit";
+                case "3":
+                    return "3";
 
                 default:
-                    return "exit";
+                    return "3";
             }
         }
 
