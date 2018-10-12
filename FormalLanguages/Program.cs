@@ -75,7 +75,7 @@ namespace FormalLanguages
                     return input;
 
                 case "2":
-                    var fileInput = File.ReadAllText(@"..\..\ProductionExample.txt");
+                    var fileInput = File.ReadAllText(@"ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
 
@@ -116,8 +116,8 @@ namespace FormalLanguages
                         Console.Write($"\n{charArray[++i]} --> ");
                         continue;
                     case '@':
-                        terminal.Add("lambda");
-                        Console.Write("lambda ");
+                        terminal.Add("λ");
+                        Console.Write("λ");
                         continue;
                     case '&':
                         Console.WriteLine();
