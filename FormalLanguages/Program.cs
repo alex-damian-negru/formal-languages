@@ -113,7 +113,7 @@ namespace FormalLanguages
                 switch (charArray[i])
                 {
                     case '$':
-                        Console.Write($"\n{charArray[++i]} --> ");
+                        Console.Write($"; {charArray[++i]} --> ");
                         continue;
                     case '@':
                         terminal.Add("λ");
