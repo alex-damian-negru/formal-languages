@@ -10,11 +10,11 @@ namespace FormalLanguages
             Console.OutputEncoding = Encoding.UTF8;
 
             var fileGrammar = GetFileGrammar();
+          
+            ShowRules();
+            Console.WriteLine("Exemplu citit din fișier: " + fileGrammar);
             BuildGrammar(fileGrammar);
 
-            ShowRules();
-
-            Console.WriteLine("Exemplu citit din fișier: " + fileGrammar);
             Console.ReadKey();
         }
 
@@ -36,6 +36,44 @@ namespace FormalLanguages
 
         private static void BuildGrammar(string input)
         {
+            var terminal = "";
+            var nonTerminal = "";
+            var charArray = input.ToCharArray();
+
+            Console.Write($"{charArray[0]} --> ");
+            for (var i = 1; i < charArray.Length; i++)
+            {
+                if (char.IsUpper(charArray[i]))
+                {
+                    nonTerminal += charArray[i] + ", ";
+                    Console.Write(charArray[i]);
+                    continue;
+                }
+
+                if (char.IsLower(charArray[i]))
+                {
+                    terminal += charArray[i] + ", ";
+                    Console.Write(charArray[i]);
+                    continue;
+                }
+
+                switch (charArray[i])
+                {
+                    case '$':
+                        Console.Write($"\n{charArray[++i]} --> ");
+                        continue;
+                    case '@':
+                        terminal += "lambda, ";
+                        Console.Write("lambda");
+                        continue;
+                    case '&':
+                        Console.WriteLine("\n-----------------------------------------------------");
+                        break;
+                    default:
+                        Console.Write(charArray[i]);
+                        break;
+                }
+            }
         }
     }
 }
