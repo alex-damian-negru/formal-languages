@@ -21,10 +21,10 @@ namespace FormalLanguages
             }
         }
 
-        private static void ShowRules()
+        private static void ShowRules() 
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("1. Primul simbol (S) din prima producție reprezintă axioma (simbolul de start)");
+            Console.WriteLine("1. Primul simbol din prima producție reprezintă axioma (simbolul de start)");
             Console.WriteLine("2. Simbolul de separare dintre producții este $");
             Console.WriteLine("3. Simbolurile neterminale sunt scrise cu litere mari");
             Console.WriteLine("4. Simbolurile terminale sunt scrise cu litere mici");
@@ -75,7 +75,7 @@ namespace FormalLanguages
                     return input;
 
                 case "2":
-                    var fileInput = File.ReadAllText(@"ProductionExample.txt");
+                    var fileInput = File.ReadAllText(@"../../ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
 
@@ -89,8 +89,8 @@ namespace FormalLanguages
 
         private static void BuildGrammar(string input)
         {
-            var terminal = new HashSet<string>();
-            var nonTerminal = new HashSet<string>();
+            var terminal = new HashSet<char>();
+            var nonTerminal = new HashSet<char>();
             var charArray = input.ToCharArray();
 
             Console.Write($"{charArray[0]} --> ");
@@ -98,14 +98,14 @@ namespace FormalLanguages
             {
                 if (char.IsUpper(charArray[i]))
                 {
-                    nonTerminal.Add(charArray[i].ToString());
+                    nonTerminal.Add(charArray[i]);
                     Console.Write(charArray[i]);
                     continue;
                 }
 
                 if (char.IsLower(charArray[i]))
                 {
-                    terminal.Add(charArray[i].ToString());
+                    terminal.Add(charArray[i]);
                     Console.Write(charArray[i]);
                     continue;
                 }
@@ -114,10 +114,10 @@ namespace FormalLanguages
                 {
                     case '$':
                         Console.Write($"; {charArray[++i]} --> ");
-                        nonTerminal.Add(charArray[i].ToString());
+                        nonTerminal.Add(charArray[i]);
                         continue;
                     case '@':
-                        terminal.Add("λ");
+                        terminal.Add('λ');
                         Console.Write("λ");
                         continue;
                     case '&':
@@ -134,7 +134,7 @@ namespace FormalLanguages
             AddLine();
         }
 
-        private static void PrintList(IEnumerable<string> list, string type)
+        private static void PrintList(IEnumerable<char> list, string type)
         {
             Console.Write($"{type} = {{");
             foreach (var entry in list)
