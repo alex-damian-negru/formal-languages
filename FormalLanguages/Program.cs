@@ -31,7 +31,7 @@ namespace FormalLanguages
             Console.WriteLine("5. Secvența vidă va fi @");
             Console.WriteLine("6. Simbolul care marchează sfârșitul gramaticii este &");
             AddLine();
-            Console.WriteLine("Selectați tipul de input dorit: ");
+            Console.WriteLine("Selectați opțiunea: ");
             Console.WriteLine("1. Citire de la tastatură");
             Console.WriteLine("2. Citire din fișier");
             Console.WriteLine("3. Ieșire");
@@ -114,6 +114,7 @@ namespace FormalLanguages
                 {
                     case '$':
                         Console.Write($"; {charArray[++i]} --> ");
+                        nonTerminal.Add(charArray[i].ToString());
                         continue;
                     case '@':
                         terminal.Add("λ");
