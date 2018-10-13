@@ -10,9 +10,6 @@ Să se citească o gramatică independentă de context sub formă de șir de car
 Se cere afișarea mulțimilor: <b>V<sub>N</sub>, V<sub>T</sub>, S, P</b>
 ## Exemplu de șir
 `SAB$AaA$A@$Ba&` <br/>
-S --> AB <br/>
-A --> aA <br/>
-A --> lambda <br/>
-B --> a <br/>
+S --> AB; A --> aA; A --> lambda; B --> a <br/>
 V<sub>N</sub> = { A, B } <br/>
 V<sub>T</sub> = { a, lambda } <br/>
