@@ -75,7 +75,7 @@ namespace FormalLanguages
                     return input;
 
                 case "2":
-                    var fileInput = File.ReadAllText(@"../../ProductionExample.txt");
+                    var fileInput = File.ReadAllText(@"ProductionExample.txt");
                     Console.WriteLine("Input din fișier: " + fileInput);
                     return fileInput;
 
